@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project.title }} - {{ portfolio.personal.name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ project.image }} {{ project.title }}</h1>
+    <p>{{ project.description }}</p>
+</div>
+
+<div class="project-detail-container">
+    <div class="project-detail-card card-glass">
+        <div class="project-detail-content">
+            <h3>Technologies Used</h3>
+            <div class="project-tech-detail">
+                {% for tech in project.technologies %}
+                <span class="tech-tag">{{ tech }}</span>
+                {% endfor %}
+            </div>
+            
+            <h3>Project Overview</h3>
+            <p>{{ project.description }}</p>
+            
+            <h3>Category</h3>
+            <p><span class="badge-category">{{ project.category }}</span></p>
+            
+            <div class="project-detail-links">
+                <a href="{{ project.github }}" target="_blank" class="btn-primary">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+                {% if project.live != '#' %}
+                <a href="{{ project.live }}" target="_blank" class="btn-secondary">
+                    <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="back-button">
+    <a href="{{ url_for('projects') }}" class="btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to Projects
+    </a>
+</div>
+
+<style>
+.project-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.project-detail-card {
+    padding: 40px;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.project-tech-detail {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+}
+.badge-category {
+    display: inline-block;
+    background: #6C63FF20;
+    color: #6C63FF;
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+.project-detail-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+.back-button {
+    text-align: center;
+    margin: 30px 0;
+}
+</style>
+{% endblock %}

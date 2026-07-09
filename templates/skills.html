@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Skills - {{ portfolio.personal.name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>💡 My Skills</h1>
+    <p>Technologies and tools I work with. Always learning and growing!</p>
+</div>
+
+<div class="skills-container">
+    <div class="skills-grid">
+        {% for skill in portfolio.skills %}
+        <div class="skill-card">
+            <div class="skill-header">
+                <span class="skill-icon">{{ skill.icon }}</span>
+                <h3 class="skill-name">{{ skill.name }}</h3>
+            </div>
+            <div class="skill-bar">
+                <div class="skill-progress" style="width: {{ skill.level }}%"></div>
+            </div>
+            <p class="skill-description">{{ skill.description }}</p>
+            <span class="skill-level">{{ skill.level }}%</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Certifications -->
+<div class="certifications-section">
+    <h2 class="section-title">📜 Certifications</h2>
+    <div class="certifications-grid">
+        {% for cert in portfolio.certifications %}
+        <div class="cert-item">
+            <span class="cert-icon">🎓</span>
+            <span>{{ cert }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Education -->
+<div class="experience-section">
+    <h2 class="section-title">🎓 Education</h2>
+    {% for edu in portfolio.education %}
+    <div class="experience-card">
+        <div class="exp-header">
+            <div>
+                <h3 class="exp-company">{{ edu.school }}</h3>
+                <p class="exp-role">{{ edu.degree }}</p>
+            </div>
+            <span class="exp-period">{{ edu.year }}</span>
+        </div>
+        <p class="exp-description">{{ edu.description }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
