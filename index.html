@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python Developer | Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/color/48/python--v1.png" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <!-- ============================================
+    NAVIGATION
+    ============================================ -->
+    <nav>
+        <div class="nav-logo">Portfolio</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" onclick="closeMenu()">Home</a></li>
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+            <li><a href="#services" onclick="closeMenu()">Services</a></li>
+            <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+            <li><a href="#github" onclick="closeMenu()">GitHub</a></li>
+            <li><a href="#timeline" onclick="closeMenu()">Timeline</a></li>
+            <li><a href="#certificates" onclick="closeMenu()">Certificates</a></li>
+            <li><a href="#testimonials" onclick="closeMenu()">Testimonials</a></li>
+            <li><a href="#faq" onclick="closeMenu()">FAQ</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+            <li><a href="#animals" onclick="closeMenu()">Animal Fun</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================
+    HERO SECTION
+    ============================================ -->
+    <section id="home" class="hero">
+        <!-- Floating Background Icons -->
+        <div class="floating-icons">
+            <i class="fab fa-python" style="left:10%; animation-duration:18s;"></i>
+            <i class="fas fa-code" style="left:30%; animation-duration:22s; animation-delay:2s;"></i>
+            <i class="fas fa-database" style="left:70%; animation-duration:20s; animation-delay:4s;"></i>
+            <i class="fas fa-cloud" style="left:90%; animation-duration:25s; animation-delay:1s;"></i>
+        </div>
+
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <h1>Hi, I'm <span>TANIADEEP KAUR</span></h1>
+                <div class="hero-typing">
+                    I am a <span class="typed-text" id="typedText"></span><span class="cursor">|</span>
+                </div>
+                <p class="hero-desc">
+                    Passionate Python Developer specializing in building robust backends, REST APIs, and modern web applications with clean, scalable code.
+                </p>
+                <div class="hero-buttons">
+                    <a href="resume/Taniadeep_kaur_resume.pdf" class="btn-primary"><i class="fas fa-download"></i> Download Resume</a>
+                    <a href="#projects" class="btn-outline"><i class="fas fa-eye"></i> View Projects</a>
+                </div>
+                <div class="hero-socials">
+                    <a href="https://github.com/taniamehra006" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/taniadeep-kaur-aab72641a/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+    <img 
+        src="image/ChatGPT Image Sep 2, 2026, 08_27_26 PM.png"
+        alt="Developer Portrait"
+        class="hero-img"
+    />
+</div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    ABOUT SECTION
+    ============================================ -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <h2 class="section-title reveal">About <span>Me</span></h2>
+            <div class="about-grid reveal">
+                <div class="about-text">
+                    <h2>A Developer Who <span style="color:var(--accent-1)">Codes with Purpose</span></h2>
+                    <p>
+                        I am a dedicated Python Developer with a strong passion for backend development and automation. 
+                        With expertise in Django, REST APIs, and database management, I love turning complex problems into simple, beautiful, and intuitive solutions.
+                    </p>
+                    <p>
+                        My goal is to leverage technology to make a positive impact on the world, one line of code at a time.
+                    </p>
+                    <div class="about-info">
+                        <div><span>Education:</span> <p>BCA</p></div>
+                        <div><span>Career:</span> <p>Python Developer</p></div>
+                        <div><span>Location:</span> <p>PUNJAB , INDIA</p></div>
+                        <div><span>Email:</span> <p>taniamehra2006@gmail.com</p></div>
+                    </div>
+                    
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?auto=format&fit=crop&w=800&q=80" alt="About Me" style="border-radius:20px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    SKILLS SECTION
+    ============================================ -->
+    <section id="skills" class="section-padding" style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title reveal">My <span>Skills</span></h2>
+            <div class="skills-grid reveal">
+                <div class="glass-card">
+                    <div class="skill-item"><div class="skill-header"><span>Python</span><span>95%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="95"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>Django</span><span>85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>SQL (PostgreSQL)</span><span>80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>REST APIs</span><span>88%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div></div>
+                </div>
+                <div class="glass-card">
+                    <div class="skill-item"><div class="skill-header"><span>HTML5</span><span>70%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>CSS3</span><span>50%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>JavaScript</span><span>50%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="75"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>Git & GitHub</span><span>90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90"></div></div></div>
+                </div>
+                <div class="glass-card">
+                    <div class="skill-item"><div class="skill-header"><span>AI & Machine Learning</span><span>70%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="70"></div></div></div>                    <div class="skill-item"><div class="skill-header"><span>Agile / Scrum</span><span>80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>Problem Solving</span><span>95%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="95"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    SERVICES SECTION
+    ============================================ -->
+    <section id="services" class="section-padding">
+        <div class="container">
+            <h2 class="section-title reveal">My <span>Services</span></h2>
+            <div class="services-grid reveal">
+                <div class="service-card glass-card">
+                    <i class="fab fa-python"></i>
+                    <h3>Python Development</h3>
+                    <p>Writing clean, efficient, and scalable Python scripts for automation, data processing, and web backends.</p>
+                </div>
+                <div class="service-card glass-card">
+                    <i class="fas fa-globe"></i>
+                    <h3>Web Development</h3>
+                    <p>Building fully responsive websites and web applications using modern frameworks like Django and Bootstrap.</p>
+                </div>
+                <div class="service-card glass-card">
+                    <i class="fas fa-server"></i>
+                    <h3>Backend Development</h3>
+                    <p>Designing robust server-side logic, databases, and RESTful APIs to power your applications.</p>
+                </div>
+                <div class="service-card glass-card">
+                    <i class="fas fa-plug"></i>
+                    <h3>API Development</h3>
+                    <p>Creating secure, fast, and documented APIs using Django REST Framework or Flask to connect services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    PROJECTS SECTION
+    ============================================ -->
+    <section id="projects" class="section-padding" style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title reveal">Recent <span>Projects</span></h2>
+            <div class="projects-grid reveal">
+                <div class="project-card glass-card">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Project 1">
+                    <div class="project-body">
+                        <h3>AI Resume Analyzer</h3>
+                        <p>AI-powered tool that analyzes resumes and provides ATS scores, skill-gap analysis, and personalized improvement suggestions.</p>
+                        <div class="project-tech"><span>Python</span><span>Streamlit</span><span>OpenAI</span><span>Pandas</span></div>
+                        <div class="project-actions">
+                            <a href="https://github.com/taniamehra006/AI-Resume-Analyzer" class="btn-primary"><i class="fab fa-github"></i> Code</a>
+                            <a href="https://ai-resume-analyzer-2kseuerqvzzxrrvjydjy5z.streamlit.app/" class="btn-outline"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card glass-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Project 2">
+                    <div class="project-body">
+                        <h3>Task Management Dashboard</h3>
+                        <p>Interactive dashboard to manage team tasks with real-time updates using Django Channels and WebSockets.</p>
+                        <div class="project-tech"><span>Django</span><span>Channels</span><span>Redis</span><span>Bootstrap</span></div>
+                        <div class="project-actions">
+                            <a href="#" class="btn-primary"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="btn-outline"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card glass-card">
+                    <img src="https://images.unsplash.com/photo-1555421689-d68471e189f2?auto=format&fit=crop&w=800&q=80" alt="Project 3">
+                    <div class="project-body">
+                        <h3>AI-Powered Chatbot</h3>
+                        <p>Intelligent chatbot built with Python, NLTK, and integrated with WhatsApp API for customer support automation.</p>
+                        <div class="project-tech"><span>Python</span><span>NLTK</span><span>Flask</span><span>Twilio</span></div>
+                        <div class="project-actions">
+                            <a href="#" class="btn-primary"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="btn-outline"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    GITHUB STATISTICS
+    ============================================ -->
+    <section id="github" class="section-padding">
+        <div class="container">
+            <h2 class="section-title reveal">GitHub <span>Stats</span></h2>
+            <div class="github-stats-grid reveal">
+                <div class="stat-placeholder"><i class="fab fa-github"></i> GitHub Stats Card</div>
+                <div class="stat-placeholder"><i class="fas fa-chart-line"></i> Contribution Graph</div>
+                <div class="stat-placeholder"><i class="fas fa-code"></i> Most Used Languages</div>
+                <div class="stat-placeholder"><i class="fas fa-fire"></i> GitHub Streak</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    TIMELINE SECTION
+    ============================================ -->
+    <section id="timeline" class="section-padding" style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title reveal">My <span>Journey</span></h2>
+            <div class="timeline reveal">
+                <div class="timeline-item">
+                    <h3>Bachelor of Computer Applications</h3>
+                    <span>2023 – 2026</span>
+                    <p>Graduated , focusing on Data Structures, Algorithms, and Database Management.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3>Master's of computer Applications in AI and ML</h3>
+                    <span>2026-2028</span>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    CERTIFICATES SECTION
+    ============================================ -->
+    <section id="certificates" class="section-padding">
+        <div class="container">
+            <h2 class="section-title reveal">My <span>Certificates</span></h2>
+            <div class="cert-grid reveal">
+                <div class="glass-card" style="text-align:center; padding: 20px;">
+                    <i class="fas fa-certificate" style="font-size:3rem; color:var(--accent-1); margin-bottom:10px;"></i>
+                    <h4>Python for Everybody</h4>
+                    <p style="color:var(--text-secondary);">Coursera</p>
+                </div>
+                <div class="glass-card" style="text-align:center; padding: 20px;">
+                    <i class="fas fa-certificate" style="font-size:3rem; color:var(--accent-1); margin-bottom:10px;"></i>
+                    <h4>Django Web Framework</h4>
+                    <p style="color:var(--text-secondary);">Meta (Coursera)</p>
+                </div>
+                <div class="glass-card" style="text-align:center; padding: 20px;">
+                    <i class="fas fa-certificate" style="font-size:3rem; color:var(--accent-1); margin-bottom:10px;"></i>
+                    <h4>SQL for Data Science</h4>
+                    <p style="color:var(--text-secondary);">LinkedIn Learning</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+    <!-- ============================================
+    ANIMAL FUN SECTION (New)
+    ============================================ -->
+    <section id="animals" class="section-padding">
+        <div class="container">
+            <h2 class="section-title reveal">🐾 Animal <span>Fun</span></h2>
+            <div class="animal-container reveal" style="text-align: center;">
+                <div class="glass-card" style="padding: 40px; max-width: 500px; margin: 0 auto;">
+                    <div style="font-size: 4rem; margin-bottom: 20px;" id="animalDisplay">🐾</div>
+                    <h3>Click the button to see a random animal!</h3>
+                    <p style="color: var(--text-secondary); margin: 15px 0;">Each click brings a new animal friend with a fun animation!</p>
+                    <button id="animalButton" class="btn-primary" style="margin: 0 auto;">
+                        <i class="fas fa-paw"></i> Show Animal
+                    </button>
+                </div>
+                <div id="animalEffectContainer" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    FAQ SECTION
+    ============================================ -->
+    <section id="faq" class="section-padding" style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title reveal">Frequently Asked <span>Questions</span></h2>
+            <div class="faq-container reveal">
+                <div class="faq-item">
+                    <div class="faq-question">What is your primary expertise? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">I specialize in Python Backend Development, specifically using Django and REST frameworks to build scalable web applications and APIs.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do you work with frontend technologies? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Yes, I have strong proficiency in HTML, CSS, and JavaScript, allowing me to build complete full-stack applications when needed.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can you help with database design? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Absolutely. I have extensive experience designing relational schemas (PostgreSQL, MySQL) and working with NoSQL databases like MongoDB.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Are you available for freelance projects? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Yes, I am currently open to freelance opportunities and interesting projects. Feel free to reach out via the contact section!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    CONTACT SECTION
+    ============================================ -->
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <h2 class="section-title reveal">Get In <span>Touch</span></h2>
+            <div class="contact-grid reveal">
+                <div>
+                    <h3>Let's connect!</h3>
+                    <p style="color:var(--text-secondary); margin-bottom:20px;">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+                    <div class="contact-info-items">
+                        <div><i class="fas fa-envelope"></i> <span>taniamehra2006@gmail.com</span></div>
+                        <div><i class="fas fa-phone-alt"></i> <span>+91 8699015598</span></div>
+                        <div><i class="fas fa-map-marker-alt"></i> <span>Punjab, India</span></div>
+                        <div><i class="fab fa-github"></i> <span>https://github.com/taniamehra006</span></div>
+                        <div><i class="fab fa-linkedin"></i> <span>https://www.linkedin.com/in/taniadeep-kaur-aab72641a/</span></div>
+                    </div>
+                </div>
+                <div>
+    <form 
+        action="https://formspree.io/f/moeqwvww" 
+        method="POST" 
+        class="contact-form glass-card" 
+        id="contactForm"
+    >
+
+        <input 
+            type="text" 
+            name="name"
+            placeholder="Your Full Name" 
+            required 
+        />
+
+        <input 
+            type="email" 
+            name="email"
+            placeholder="Your Email Address" 
+            required 
+        />
+
+        <input 
+            type="text" 
+            name="subject"
+            placeholder="Subject" 
+            required 
+        />
+
+        <textarea 
+            name="message"
+            rows="5" 
+            placeholder="Your Message" 
+            required
+        ></textarea>
+
+        <button 
+            type="submit" 
+            class="btn-primary" 
+            style="width:100%; justify-content:center;"
+        >
+            Send Message 
+            <i class="fas fa-paper-plane"></i>
+        </button>
+
+    </form>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    FOOTER
+    ============================================ -->
+    <footer>
+        <div class="container footer-content">
+            <div>&copy; 2026 TANIADEEP KAUR. All rights reserved.</div>
+            <div class="footer-socials">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+            <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
