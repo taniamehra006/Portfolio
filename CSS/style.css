@@ -101,11 +101,17 @@ img {
     border-radius: 16px;
     box-shadow: var(--shadow);
     padding: 24px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .glass-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Subtle 3D tilt on hover (JS sets --rx / --ry via mousemove) */
+.tilt-card {
+    transform: perspective(800px) rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg)) translateY(0);
+    transition: transform 0.15s ease-out, box-shadow 0.25s ease;
 }
 
 .btn-primary {
@@ -121,10 +127,28 @@ img {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px var(--accent-glow);
+    position: relative;
+    overflow: hidden;
 }
 .btn-primary:hover {
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 8px 25px var(--accent-glow);
+}
+
+/* Ripple effect element injected by JS on click */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(0);
+    animation: rippleEffect 0.6s linear;
+    pointer-events: none;
+}
+@keyframes rippleEffect {
+    to {
+        transform: scale(3);
+        opacity: 0;
+    }
 }
 
 .btn-outline {
@@ -182,9 +206,23 @@ nav {
     font-weight: 500;
     color: var(--text-secondary);
     transition: color 0.3s ease;
+    position: relative;
+}
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    transition: width 0.3s ease;
 }
 .nav-links a:hover {
     color: var(--text-primary);
+}
+.nav-links a:hover::after {
+    width: 100%;
 }
 
 .nav-actions {
@@ -224,6 +262,16 @@ nav {
     height: 3px;
     background: var(--text-primary);
     border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
 }
 
 /* =========================================
@@ -238,11 +286,35 @@ nav {
     overflow: hidden;
 }
 
+/* Animated gradient blob behind hero content */
+.hero-blob {
+    position: absolute;
+    top: -10%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle at 30% 30%, var(--accent-1), transparent 60%),
+                radial-gradient(circle at 70% 70%, var(--accent-2), transparent 60%);
+    opacity: 0.15;
+    filter: blur(60px);
+    border-radius: 50%;
+    animation: blobMove 12s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+@keyframes blobMove {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-40px, 30px) scale(1.1); }
+    66% { transform: translate(30px, -20px) scale(0.95); }
+}
+
 .hero-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 50px;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-content h1 {
@@ -322,6 +394,8 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-image-wrapper .hero-img {
@@ -479,6 +553,10 @@ nav {
     height: 200px;
     object-fit: cover;
     border-bottom: 1px solid var(--border-color);
+    transition: transform 0.4s ease;
+}
+.project-card:hover img {
+    transform: scale(1.05);
 }
 .project-body {
     padding: 24px;
@@ -515,29 +593,26 @@ nav {
 }
 
 /* =========================================
-   10. GITHUB STATS
+   10. GITHUB STATS (Live)
    ========================================= */
 .github-stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
+    align-items: center;
 }
-.stat-placeholder {
+.stat-card {
     background: var(--bg-secondary);
     border-radius: 12px;
     border: 1px solid var(--border-color);
-    height: 150px;
+    padding: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    flex-direction: column;
-    gap: 10px;
 }
-.stat-placeholder i {
-    font-size: 2.5rem;
-    color: var(--accent-1);
+.stat-card img {
+    width: 100%;
+    border-radius: 8px;
 }
 
 /* =========================================
@@ -781,6 +856,7 @@ footer {
     border-radius: 50%;
     cursor: pointer;
     transition: 0.3s;
+    display: none;
 }
 #backToTop:hover {
     transform: translateY(-5px);
@@ -788,7 +864,7 @@ footer {
 }
 
 /* =========================================
-   FADE-IN ANIMATIONS
+   FADE-IN ANIMATIONS (with stagger for grid children)
    ========================================= */
 .reveal {
     opacity: 0;
@@ -798,6 +874,37 @@ footer {
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Stagger children of revealed grids for a nicer cascade */
+.skills-grid.active > *,
+.services-grid.active > *,
+.projects-grid.active > *,
+.cert-grid.active > *,
+.testimonial-grid.active > * {
+    animation: staggerIn 0.6s ease backwards;
+}
+.skills-grid.active > *:nth-child(1),
+.services-grid.active > *:nth-child(1),
+.projects-grid.active > *:nth-child(1),
+.cert-grid.active > *:nth-child(1),
+.testimonial-grid.active > *:nth-child(1) { animation-delay: 0.05s; }
+.skills-grid.active > *:nth-child(2),
+.services-grid.active > *:nth-child(2),
+.projects-grid.active > *:nth-child(2),
+.cert-grid.active > *:nth-child(2),
+.testimonial-grid.active > *:nth-child(2) { animation-delay: 0.15s; }
+.skills-grid.active > *:nth-child(3),
+.services-grid.active > *:nth-child(3),
+.projects-grid.active > *:nth-child(3),
+.cert-grid.active > *:nth-child(3),
+.testimonial-grid.active > *:nth-child(3) { animation-delay: 0.25s; }
+.skills-grid.active > *:nth-child(4),
+.services-grid.active > *:nth-child(4) { animation-delay: 0.35s; }
+
+@keyframes staggerIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 /* =========================================
@@ -815,9 +922,12 @@ footer {
     .hero-socials {
         justify-content: center;
     }
-    .hero-image-wrapper .placeholder-img {
-        max-width: 300px;
-        margin-top: 30px;
+    /* FIX: was targeting a nonexistent .placeholder-img, now correctly targets .hero-img */
+    .hero-image-wrapper .hero-img {
+        width: 100%;
+        max-width: 320px;
+        height: 400px;
+        margin: 0 auto;
     }
     .about-grid {
         grid-template-columns: 1fr;
@@ -853,5 +963,21 @@ footer {
     }
     .section-title {
         font-size: 2rem;
+    }
+    .hero-blob {
+        width: 350px;
+        height: 350px;
+    }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }

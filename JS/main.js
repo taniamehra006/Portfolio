@@ -58,25 +58,34 @@ const navLinks = document.getElementById('navLinks');
 
 hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active'); // FIX: animates hamburger into an X
 });
 
 function closeMenu() {
     navLinks.classList.remove('active');
+    hamburger.classList.remove('active');
 }
 
-// ========== 4. SCROLL REVEAL ==========
+// ========== 4. SCROLL REVEAL (throttled via requestAnimationFrame) ==========
+let revealTicking = false;
 function reveal() {
-    var reveals = document.querySelectorAll(".reveal");
-    for (var i = 0; i < reveals.length; i++) {
-        var windowHeight = window.innerHeight;
-        var elementTop = reveals[i].getBoundingClientRect().top;
-        var elementVisible = 150;
+    const reveals = document.querySelectorAll(".reveal");
+    const windowHeight = window.innerHeight;
+    const elementVisible = 150;
+    reveals.forEach((el) => {
+        const elementTop = el.getBoundingClientRect().top;
         if (elementTop < windowHeight - elementVisible) {
-            reveals[i].classList.add("active");
+            el.classList.add("active");
         }
-    }
+    });
+    revealTicking = false;
 }
-window.addEventListener("scroll", reveal);
+window.addEventListener("scroll", () => {
+    if (!revealTicking) {
+        window.requestAnimationFrame(reveal);
+        revealTicking = true;
+    }
+});
 reveal();
 
 // ========== 5. ANIMATED SKILL BARS ==========
@@ -109,20 +118,23 @@ faqItems.forEach(item => {
     });
 });
 
-// ========== 7. BACK TO TOP ==========
+// ========== 7. BACK TO TOP (throttled) ==========
 const backToTopBtn = document.getElementById('backToTop');
+let backToTopTicking = false;
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTopBtn.style.display = 'block';
-    } else {
-        backToTopBtn.style.display = 'none';
+    if (!backToTopTicking) {
+        window.requestAnimationFrame(() => {
+            backToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+            backToTopTicking = false;
+        });
+        backToTopTicking = true;
     }
 });
 backToTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// ========== 8. CONTACT FORM ========== //
+// ========== 8. CONTACT FORM ==========
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', async (e) => {
@@ -131,7 +143,6 @@ contactForm.addEventListener('submit', async (e) => {
     const submitButton = contactForm.querySelector('button[type="submit"]');
     const originalButtonText = submitButton.innerHTML;
 
-    // Show sending status
     submitButton.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
     submitButton.disabled = true;
 
@@ -150,40 +161,33 @@ contactForm.addEventListener('submit', async (e) => {
         } else {
             alert('Sorry, there was a problem sending your message. Please try again.');
         }
-
     } catch (error) {
         alert('Something went wrong. Please try again later.');
         console.error('Form submission error:', error);
-
     } finally {
         submitButton.innerHTML = originalButtonText;
         submitButton.disabled = false;
     }
 });
+
 // ========== 9. ANIMAL FUN EFFECTS ==========
-const animalEmojis = ['🦄', '🐉', '🦊', '🐼', '🐨', '🦁', '🐯', '🐱', '🐶', '🐺', '🦝', '🐮', '🦄', '🐧', '🐦', '🐤', '🐣', '🐥', '🦆', '🦅', '🦉', '🐴', '🦄', '🐝', '🐞', '🦋', '🐙', '🦑', '🐬', '🐳', '🐊', '🦕', '🦖', '🐉'];
+const animalEmojis = ['🦄', '🐉', '🦊', '🐼', '🐨', '🦁', '🐯', '🐱', '🐶', '🐺', '🦝', '🐮', '🐧', '🐦', '🐤', '🐣', '🐥', '🦆', '🦅', '🦉', '🐴', '🐝', '🐞', '🦋', '🐙', '🦑', '🐬', '🐳', '🐊', '🦕', '🦖'];
 
-let animalInterval;
-
-document.getElementById('animalButton').addEventListener('click', function() {
+const animalButton = document.getElementById('animalButton');
+animalButton.addEventListener('click', function () {
     const display = document.getElementById('animalDisplay');
     const randomEmoji = animalEmojis[Math.floor(Math.random() * animalEmojis.length)];
-    
-    // Update display with animation
+
     display.textContent = randomEmoji;
     display.classList.remove('animal-float');
-    // Trigger reflow
-    void display.offsetWidth;
+    void display.offsetWidth; // trigger reflow to restart animation
     display.classList.add('animal-float');
-    
-    // Create burst effect
+
     createAnimalBurst(randomEmoji);
-    
-    // Add a fun message
+
     const messages = ['🐾 Woof!', '🦄 Magical!', '🐉 Roar!', '🦊 What does the fox say?', '🐼 Panda-monium!', '🦁 King of the jungle!'];
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-    
-    // Show message temporarily
+
     const button = this;
     const originalText = button.innerHTML;
     button.innerHTML = `<i class="fas fa-paw"></i> ${randomMessage}`;
@@ -194,36 +198,72 @@ document.getElementById('animalButton').addEventListener('click', function() {
 
 function createAnimalBurst(emoji) {
     const container = document.getElementById('animalEffectContainer');
-    
-    // Create multiple burst elements
+
     for (let i = 0; i < 8; i++) {
         const burst = document.createElement('div');
         burst.className = 'animal-burst';
         burst.textContent = emoji;
-        
-        // Random position around the center
+
         const x = window.innerWidth / 2 + (Math.random() - 0.5) * 300;
         const y = window.innerHeight / 2 + (Math.random() - 0.5) * 200;
         burst.style.left = x + 'px';
         burst.style.top = y + 'px';
         burst.style.fontSize = (2 + Math.random() * 3) + 'rem';
         burst.style.animationDuration = (1.5 + Math.random() * 1) + 's';
-        
+
         container.appendChild(burst);
-        
-        // Remove after animation
+
         setTimeout(() => {
             burst.remove();
         }, 3000);
     }
 }
 
-// ========== 10. ADDITIONAL: Random Animal Fact ==========
-console.log('🐾 Welcome to the Animal Fun section! Click the button to see magical animals!');
-
-// ========== 11. KEYBOARD SHORTCUT: Press 'A' for animal ==========
+// ========== 10. KEYBOARD SHORTCUT: Press 'A' for animal ==========
+// FIX: previously fired even while typing in the contact form (e.g. typing "Tania").
+// Now it's ignored whenever focus is inside an input, textarea, or editable field.
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'a' || e.key === 'A') {
-        document.getElementById('animalButton').click();
+    const tag = document.activeElement.tagName;
+    const isTyping = tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement.isContentEditable;
+    if (!isTyping && (e.key === 'a' || e.key === 'A')) {
+        animalButton.click();
     }
 });
+
+// ========== 11. BUTTON RIPPLE EFFECT ==========
+document.querySelectorAll('.btn-primary').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+        const rect = this.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        const size = Math.max(rect.width, rect.height);
+        ripple.className = 'ripple';
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+        ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+        this.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+    });
+});
+
+// ========== 12. TILT-ON-HOVER FOR CARDS ==========
+// Adds a subtle 3D tilt that follows the cursor on project/service/cert cards.
+const tiltCards = document.querySelectorAll('.tilt-card');
+tiltCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((x - centerX) / centerX) * 6; // max ~6deg
+        const rotateY = ((y - centerY) / centerY) * -6;
+        card.style.setProperty('--rx', rotateX + 'deg');
+        card.style.setProperty('--ry', rotateY + 'deg');
+    });
+    card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+    });
+});
+
+console.log('🐾 Portfolio loaded. Press "A" anywhere outside a form field for a surprise animal!');
