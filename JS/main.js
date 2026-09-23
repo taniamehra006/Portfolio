@@ -244,7 +244,116 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
         setTimeout(() => ripple.remove(), 600);
     });
 });
+// ============================================
+// GITHUB LIVE STATISTICS
+// ============================================
 
+async function loadGitHubStats() {
+
+    const username = "taniamehra006";
+
+    const totalElement =
+        document.getElementById("github-total");
+
+    const streakElement =
+        document.getElementById("github-streak");
+
+    const datesElement =
+        document.getElementById("github-streak-dates");
+
+    try {
+
+        const response = await fetch(
+            `https://github-contributions.vercel.app/api/v1/${username}`
+        );
+
+        if (!response.ok) {
+            throw new Error("GitHub API request failed");
+        }
+
+        const data = await response.json();
+
+        console.log("GitHub data:", data);
+
+        // Total contributions
+        totalElement.textContent = data.total;
+
+        // Contribution days
+        const contributions = data.contributions
+            .map(day => ({
+                date: day.date,
+                count: Number(day.count)
+            }))
+            .sort((a, b) =>
+                new Date(a.date) - new Date(b.date)
+            );
+
+        // Calculate current streak
+        let currentStreak = 0;
+        let streakStart = null;
+        let streakEnd = null;
+
+        for (let i = contributions.length - 1; i >= 0; i--) {
+
+            const day = contributions[i];
+
+            if (day.count > 0) {
+
+                currentStreak++;
+
+                if (!streakEnd) {
+                    streakEnd = day.date;
+                }
+
+                streakStart = day.date;
+
+            } else {
+                break;
+            }
+        }
+
+        // Show streak
+        streakElement.textContent = currentStreak;
+
+        // Show streak dates
+        if (streakStart && streakEnd) {
+
+            const options = {
+                month: "short",
+                day: "numeric"
+            };
+
+            const start = new Date(streakStart)
+                .toLocaleDateString("en-US", options);
+
+            const end = new Date(streakEnd)
+                .toLocaleDateString("en-US", options);
+
+            datesElement.textContent =
+                `${start} – ${end}`;
+
+        } else {
+
+            datesElement.textContent =
+                "No current streak";
+        }
+
+    } catch (error) {
+
+        console.error(
+            "GitHub statistics error:",
+            error
+        );
+
+        totalElement.textContent = "--";
+        streakElement.textContent = "--";
+        datesElement.textContent = "Unable to load";
+    }
+}
+
+
+// Run GitHub statistics
+loadGitHubStats();
 // ========== 12. TILT-ON-HOVER FOR CARDS ==========
 // Adds a subtle 3D tilt that follows the cursor on project/service/cert cards.
 const tiltCards = document.querySelectorAll('.tilt-card');

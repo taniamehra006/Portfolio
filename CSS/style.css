@@ -399,8 +399,8 @@ nav {
 }
 
 .hero-image-wrapper .hero-img {
-    width: 400px;
-    height: 500px;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
     border-radius: 20px;
     border: 2px solid var(--border-color);
@@ -592,27 +592,94 @@ nav {
     font-size: 0.85rem;
 }
 
-/* =========================================
-   10. GITHUB STATS (Live)
-   ========================================= */
+/* ============================================
+   PREMIUM GITHUB STATS
+============================================ */
+
 .github-stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px;
-    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-top: 45px;
 }
-.stat-card {
-    background: var(--bg-secondary);
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    padding: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+.github-stats-grid .stat-card {
+    background: rgba(20, 30, 55, 0.8);
+    border: 1px solid rgba(100, 140, 220, 0.18);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
 }
-.stat-card img {
-    width: 100%;
-    border-radius: 8px;
+
+.github-stats-grid .stat-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(100, 140, 220, 0.5);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+.stat-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.github-stats-grid .stat-card h3 {
+    font-size: 2.2rem;
+    margin: 5px 0;
+    background: linear-gradient(90deg, #58a6ff, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.github-stats-grid .stat-card p {
+    margin: 8px 0 5px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.github-stats-grid .stat-card span {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.github-action {
+    text-align: center;
+    margin-top: 35px;
+}
+
+.github-action a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(90deg, #2563eb, #7c3aed);
+    transition: all 0.3s ease;
+}
+
+.github-action a:hover {
+    transform: translateY(-3px);
+}
+
+.github-live-text {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-top: 20px;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 900px) {
+    .github-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .github-stats-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* =========================================
