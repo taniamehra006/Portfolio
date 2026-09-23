@@ -400,7 +400,7 @@ nav {
 
 .hero-image-wrapper .hero-img {
     width: 300px;
-    height: 300px;
+    height: 400px;
     object-fit: cover;
     border-radius: 20px;
     border: 2px solid var(--border-color);
