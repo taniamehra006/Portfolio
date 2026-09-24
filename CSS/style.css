@@ -628,6 +628,7 @@ nav {
     margin: 5px 0;
     background: linear-gradient(90deg, #58a6ff, #8b5cf6);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 

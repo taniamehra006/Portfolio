@@ -244,116 +244,6 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
         setTimeout(() => ripple.remove(), 600);
     });
 });
-// ============================================
-// GITHUB LIVE STATISTICS
-// ============================================
-
-async function loadGitHubStats() {
-
-    const username = "taniamehra006";
-
-    const totalElement =
-        document.getElementById("github-total");
-
-    const streakElement =
-        document.getElementById("github-streak");
-
-    const datesElement =
-        document.getElementById("github-streak-dates");
-
-    try {
-
-        const response = await fetch(
-            `https://github-contributions.vercel.app/api/v1/${username}`
-        );
-
-        if (!response.ok) {
-            throw new Error("GitHub API request failed");
-        }
-
-        const data = await response.json();
-
-        console.log("GitHub data:", data);
-
-        // Total contributions
-        totalElement.textContent = data.total;
-
-        // Contribution days
-        const contributions = data.contributions
-            .map(day => ({
-                date: day.date,
-                count: Number(day.count)
-            }))
-            .sort((a, b) =>
-                new Date(a.date) - new Date(b.date)
-            );
-
-        // Calculate current streak
-        let currentStreak = 0;
-        let streakStart = null;
-        let streakEnd = null;
-
-        for (let i = contributions.length - 1; i >= 0; i--) {
-
-            const day = contributions[i];
-
-            if (day.count > 0) {
-
-                currentStreak++;
-
-                if (!streakEnd) {
-                    streakEnd = day.date;
-                }
-
-                streakStart = day.date;
-
-            } else {
-                break;
-            }
-        }
-
-        // Show streak
-        streakElement.textContent = currentStreak;
-
-        // Show streak dates
-        if (streakStart && streakEnd) {
-
-            const options = {
-                month: "short",
-                day: "numeric"
-            };
-
-            const start = new Date(streakStart)
-                .toLocaleDateString("en-US", options);
-
-            const end = new Date(streakEnd)
-                .toLocaleDateString("en-US", options);
-
-            datesElement.textContent =
-                `${start} – ${end}`;
-
-        } else {
-
-            datesElement.textContent =
-                "No current streak";
-        }
-
-    } catch (error) {
-
-        console.error(
-            "GitHub statistics error:",
-            error
-        );
-
-        totalElement.textContent = "--";
-        streakElement.textContent = "--";
-        datesElement.textContent = "Unable to load";
-    }
-}
-
-
-// Run GitHub statistics
-loadGitHubStats();
 // ========== 12. TILT-ON-HOVER FOR CARDS ==========
 // Adds a subtle 3D tilt that follows the cursor on project/service/cert cards.
 const tiltCards = document.querySelectorAll('.tilt-card');
@@ -376,3 +266,89 @@ tiltCards.forEach(card => {
 });
 
 console.log('🐾 Portfolio loaded. Press "A" anywhere outside a form field for a surprise animal!');
+// ============================================
+// GITHUB LIVE STATISTICS
+// ============================================
+
+async function loadGitHubStats() {
+
+    const username = "taniamehra006";
+
+    const totalElement = document.getElementById("github-total");
+    const streakElement = document.getElementById("github-streak");
+    const datesElement = document.getElementById("github-streak-dates");
+    const longestElement = document.getElementById("github-longest-streak");
+    const longestDatesElement = document.getElementById("github-longest-streak-dates");
+
+    try {
+        const response = await fetch(
+            `https://github-contributions.vercel.app/api/v1/${username}`
+        );
+
+        if (!response.ok) {
+            throw new Error("GitHub API request failed");
+        }
+
+        const data = await response.json();
+
+        totalElement.textContent = data.total;
+
+        const contributions = data.contributions
+            .map(day => ({ date: day.date, count: Number(day.count) }))
+            .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+        const options = { month: "short", day: "numeric" };
+
+        // ---- Current streak ----
+        let currentStreak = 0;
+        let curStart = null, curEnd = null;
+        for (let i = contributions.length - 1; i >= 0; i--) {
+            const day = contributions[i];
+            if (day.count > 0) {
+                currentStreak++;
+                if (!curEnd) curEnd = day.date;
+                curStart = day.date;
+            } else {
+                break;
+            }
+        }
+        streakElement.textContent = currentStreak;
+        datesElement.textContent = (curStart && curEnd)
+            ? `${new Date(curStart).toLocaleDateString("en-US", options)} – ${new Date(curEnd).toLocaleDateString("en-US", options)}`
+            : "No current streak";
+
+        // ---- Longest streak ----
+        let longest = 0, longestStart = null, longestEnd = null;
+        let runStreak = 0, runStart = null;
+        for (let i = 0; i < contributions.length; i++) {
+            const day = contributions[i];
+            if (day.count > 0) {
+                if (runStreak === 0) runStart = day.date;
+                runStreak++;
+                if (runStreak > longest) {
+                    longest = runStreak;
+                    longestStart = runStart;
+                    longestEnd = day.date;
+                }
+            } else {
+                runStreak = 0;
+            }
+        }
+        if (longestElement) longestElement.textContent = longest;
+        if (longestDatesElement) {
+            longestDatesElement.textContent = (longestStart && longestEnd)
+                ? `${new Date(longestStart).toLocaleDateString("en-US", options)} – ${new Date(longestEnd).toLocaleDateString("en-US", options)}`
+                : "N/A";
+        }
+
+    } catch (error) {
+        console.error("GitHub statistics error:", error);
+        totalElement.textContent = "--";
+        streakElement.textContent = "--";
+        datesElement.textContent = "Unable to load";
+        if (longestElement) longestElement.textContent = "--";
+        if (longestDatesElement) longestDatesElement.textContent = "Unable to load";
+    }
+}
+
+loadGitHubStats();
