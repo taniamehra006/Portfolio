@@ -6,8 +6,10 @@
     <title>Taniadeep Kaur | Python Developer Portfolio</title>
     <meta name="description" content="Taniadeep Kaur — Python Developer specializing in Django, REST APIs, and AI-powered automation." />
     <link rel="icon" type="image/x-icon" href="https://img.icons8.com/color/48/python--v1.png" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Google Fonts (changed: Inter -> Poppins + Caveat for the neon theme) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet" />
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <!-- Main CSS -->
@@ -61,6 +63,8 @@
 
         <div class="container hero-grid">
             <div class="hero-content">
+                <!-- NEW: tagline -->
+                <p class="hero-tagline">BUILDING TOMORROW</p>
                 <h1>Hi, I'm <span>TANIADEEP KAUR</span></h1>
                 <div class="hero-typing">
                     I am a <span class="typed-text" id="typedText"></span><span class="cursor">|</span>
@@ -84,6 +88,14 @@
                     alt="Taniadeep Kaur - Developer Portrait"
                     class="hero-img tilt-card"
                 />
+                <!-- NEW: script note + skills panel -->
+                <span class="hero-script">Code<br>Create<br>Innovate &#9829;</span>
+                <ul class="hero-skills">
+                    <li><i class="fab fa-python"></i> Python</li>
+                    <li><i class="fas fa-database"></i> Django</li>
+                    <li><i class="fas fa-brain"></i> AI &amp; ML</li>
+                    <li><i class="fas fa-cloud"></i> APIs</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -209,10 +221,9 @@
                     </div>
                 </div>
                 <div class="project-card glass-card tilt-card">
-                    <img src="https://images.unsplash.com/photo-1555421689-d68471e189f2?auto=format&fit=crop&w=800&q=80" alt="AI Chatbot project screenshot" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1555421689-d68471e189f2?auto=format&fit=crop&w=800&q=80" alt="AI face detection and recognition project screenshot" loading="lazy">
                     <div class="project-body">
-                        <h3>AI face detection and recognition system 
-                        </h3>
+                        <h3>AI face detection and recognition system</h3>
                         <p>Intelligent chatbot built with Python, NLTK, and integrated with WhatsApp API for customer support automation.</p>
                         <div class="project-tech"><span>Python</span><span>NLTK</span><span>Flask</span><span>Twilio</span></div>
                         <div class="project-actions">
@@ -224,63 +235,65 @@
             </div>
         </div>
     </section>
-<!-- ============================================
+
+    <!-- ============================================
      GITHUB STATISTICS
-============================================ -->
-<section id="github" class="section-padding">
-    <div class="container">
+    ============================================ -->
+    <section id="github" class="section-padding">
+        <div class="container">
 
-        <h2 class="section-title reveal">
-            GitHub <span>Stats</span>
-        </h2>
+            <h2 class="section-title reveal">
+                GitHub <span>Stats</span>
+            </h2>
 
-        <div class="github-stats-grid reveal">
+            <div class="github-stats-grid reveal">
 
-            <div class="stat-card">
-                <div class="stat-icon">📊</div>
-                <h3 id="github-total">--</h3>
-                <p>Total Contributions</p>
-                <span>Last Year</span>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <h3 id="github-total">--</h3>
+                    <p>Total Contributions</p>
+                    <span>Last Year</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <h3 id="github-streak">--</h3>
+                    <p>Current Streak</p>
+                    <span id="github-streak-dates">Loading...</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <h3 id="github-longest-streak">--</h3>
+                    <p>Longest Streak</p>
+                    <span id="github-longest-streak-dates">Loading...</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">💻</div>
+                    <h3>7+</h3>
+                    <p>Public Repositories</p>
+                    <span>Python & Web Projects</span>
+                </div>
+
             </div>
 
-            <div class="stat-card">
-                <div class="stat-icon">🔥</div>
-                <h3 id="github-streak">--</h3>
-                <p>Current Streak</p>
-                <span id="github-streak-dates">Loading...</span>
+            <div class="github-action">
+                <a href="https://github.com/taniamehra006"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <span>View My GitHub</span>
+                    <span>↗</span>
+                </a>
             </div>
 
-            <div class="stat-card">
-                <div class="stat-icon">🏆</div>
-                <h3 id="github-longest-streak">--</h3>
-                <p>Longest Streak</p>
-                <span id="github-longest-streak-dates">Loading...</span>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-icon">💻</div>
-                <h3>7+</h3>
-                <p>Public Repositories</p>
-                <span>Python & Web Projects</span>
-            </div>
+            <p class="github-live-text">
+                🚀 Building projects and improving every day.
+            </p>
 
         </div>
+    </section>
 
-        <div class="github-action">
-            <a href="https://github.com/taniamehra006"
-               target="_blank"
-               rel="noopener noreferrer">
-                <span>View My GitHub</span>
-                <span>↗</span>
-            </a>
-        </div>
-
-        <p class="github-live-text">
-            🚀 Building projects and improving every day.
-        </p>
-
-    </div>
-</section>
     <!-- ============================================
     TIMELINE SECTION
     ============================================ -->
@@ -327,7 +340,7 @@
             </div>
         </div>
     </section>
-        
+
 
     <!-- ============================================
     ANIMAL FUN SECTION
