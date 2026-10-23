@@ -282,7 +282,7 @@ async function loadGitHubStats() {
 
     try {
         const response = await fetch(
-            `https://github-contributions.vercel.app/api/v1/${username}`
+            `https://github-contributions-api.jogruber.de/v4/${username}?y=last`
         );
 
         if (!response.ok) {
@@ -291,18 +291,29 @@ async function loadGitHubStats() {
 
         const data = await response.json();
 
-        totalElement.textContent = data.total;
-
+        // Only count days up to today, oldest -> newest
+        const todayStr = new Date().toISOString().slice(0, 10);
         const contributions = data.contributions
             .map(day => ({ date: day.date, count: Number(day.count) }))
+            .filter(day => day.date <= todayStr)
             .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+        // Total for the last year
+        const total = contributions.reduce((sum, day) => sum + day.count, 0);
+        totalElement.textContent = total;
 
         const options = { month: "short", day: "numeric" };
 
         // ---- Current streak ----
+        // If today has 0 contributions so far, don't break the streak yet
+        let lastIndex = contributions.length - 1;
+        if (lastIndex >= 0 && contributions[lastIndex].date === todayStr && contributions[lastIndex].count === 0) {
+            lastIndex--;
+        }
+
         let currentStreak = 0;
         let curStart = null, curEnd = null;
-        for (let i = contributions.length - 1; i >= 0; i--) {
+        for (let i = lastIndex; i >= 0; i--) {
             const day = contributions[i];
             if (day.count > 0) {
                 currentStreak++;
